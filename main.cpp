@@ -3,6 +3,20 @@
 #include <glad/glad.h> //glad needs to be included before glfw
 #include <GLFW/glfw3.h>
 
+// Declare a function to be called when the window is resized
+void frameBufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	std::cout << "Window resized to " << width << "x" << height << std::endl;
+}
+
+// Declare a function to be called when the key is pressed
+void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	std::cout << "Key pressed: " << key << std::endl;
+	//std::cout << "Scancode: " << scancode << std::endl;
+	std::cout << "Action: " << action << std::endl;
+	std::cout << "Mods: " << mods << std::endl;
+}
 
 // Create a window
 int main() {
@@ -19,6 +33,12 @@ int main() {
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 	// Set the window to the current context
 	glfwMakeContextCurrent(window);
+
+	// Set the frame buffer size callback
+	glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+
+	// Set the key callback
+	glfwSetKeyCallback(window, keyCallBack);
 
 	// Execute window loop
 	while (!glfwWindowShouldClose(window))
